@@ -11,17 +11,17 @@ class ReverseMountainCar(gym.Env):
         self.low = np.array([self.min_position, -self.max_speed], dtype=np.float32)
         self.high = np.array([self.max_position, self.max_speed], dtype=np.float32)
         
-        self.environemt_observation_space = spaces.Discrete(3)
-        self.environemt_action_space = spaces.Box(self.low, self.high, dtype=np.float32)
+        self.observation_space = spaces.Discrete(3)
+        self.action_space = spaces.Box(self.low, self.high, dtype=np.float32)
         
     def step(self, environment_action):
         # environemnt_action is an "observation" (like the position & velocity of the cart)
-        return environment_action, self.environemt_action_space.sample()
+        return (environment_action, self.action_space.sample()), 0, False, {}
     
     def reset(self):
         initial_environemt_action = np.array([np.random.uniform(low=-0.6, high=-0.4), 0])
         # return s,a pair
-        return initial_environemt_action, self.environemt_observation_space.sample()
+        return (initial_environemt_action, self.observation_space.sample())
         
     def render(self):
         ...
