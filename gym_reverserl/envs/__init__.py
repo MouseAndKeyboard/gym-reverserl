@@ -1,1 +1,1 @@
-from gym_reverserl.envs.meta_env import ReverseMountainCar
+from gym_reverserl.envs.reverse_mountain_car_env import ReverseMountainCar
