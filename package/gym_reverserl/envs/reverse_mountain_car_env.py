@@ -16,7 +16,11 @@ class ReverseMountainCar(gym.Env):
         
     def step(self, environment_action):
         # environemnt_action is an "observation" (like the position & velocity of the cart)
-        return (environment_action, self.action_space.sample()), 0, False, {}
+        
+        # run the agent's policy here:
+        agent_action = self.observation_space.sample()
+        
+        return (environment_action, agent_action), 0, False, {}
     
     def reset(self):
         initial_environemt_action = np.array([np.random.uniform(low=-0.6, high=-0.4), 0])
