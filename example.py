@@ -7,5 +7,5 @@ print(initial_state)
 for step in range(100):
     action = env.action_space.sample()
     print(action)
-    a, b, c, d = env.step(action)
-    print(a, b, c ,d)
+    obs, reward, done, info = env.step(action)
+    print(obs, reward, done, info)
