@@ -25,12 +25,16 @@ for episode in range(1):
         environment_state = new_environment_state
 
 
+
 metaEnv = gym.make("gym_reverserl:mountaincar-v0")
+def customNextEnvStatePolicy(previous_env_state, agent_action):
+    return metaEnv.action_space.sample()
+
 obs = metaEnv.reset()
 previous_environment_state, agent_action = obs
 for step in range(100):
     # select next environment_state based on obs
-    environment_state = metaEnv.action_space.sample()
+    environment_state = customNextEnvStatePolicy(previous_environment_state, agent_action)
     print(previous_environment_state, agent_action, environment_state)
     
     obs, reward, done, info = metaEnv.step(environment_state)
