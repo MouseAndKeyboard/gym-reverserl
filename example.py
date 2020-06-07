@@ -13,16 +13,16 @@ expertEnvPolicy = gym.make("MountainCar-v0")
 # what the next environemnt state should be.
 samples = []
 for episode in range(1):
-    environment_state = expertEnvPolicy.reset()
+    previous_environment_state = expertEnvPolicy.reset()
     for step in range(1):
-        agent_action = randomAgentPolicy(environment_state, expertEnvPolicy)
-        samples.append((environment_state, agent_action)) # (previous "action", observation)
-        
-        # reward and done should be part of the environment_state
-        new_environment_state, reward, done, info = expertEnvPolicy.step(agent_action)
+        agent_action = randomAgentPolicy(previous_environment_state, expertEnvPolicy)
         
         
-        environment_state = new_environment_state
+        # reward and done could possibly be part of the environment_state
+        environment_state, reward, done, info = expertEnvPolicy.step(agent_action)
+        samples.append((previous_environment_state, agent_action), environment_state) # observation, action
+        
+        previous_environment_state = environment_state
 
 
 
