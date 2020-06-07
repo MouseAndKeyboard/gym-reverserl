@@ -20,7 +20,7 @@ for episode in range(1):
         
         # reward and done could possibly be part of the environment_state
         environment_state, reward, done, info = expertEnvPolicy.step(agent_action)
-        samples.append((previous_environment_state, agent_action), environment_state) # observation, action
+        samples.append(((previous_environment_state, agent_action), environment_state)) # observation, action
         
         previous_environment_state = environment_state
 
