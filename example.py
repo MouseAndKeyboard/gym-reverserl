@@ -6,7 +6,7 @@ import gym_reverserl
 def randomAgentPolicy(environment_state, env):
     return env.action_space.sample()
 
-expertEnvPolicy = gym.make("MountainCar-v0") 
+expertEnvPolicy = gym.make("MountainCar-v0")
 
 # we want to create some buffer of environment_state, agent_action pairs 
 # expert env takes the previous state and considers the agent's action to "decide"
@@ -25,8 +25,10 @@ for episode in range(1):
         previous_environment_state = environment_state
 
 
+def randomAgentPolicy(environment_state, env):
+    return env.agent_action_space.sample()
 
-metaEnv = gym.make("gym_reverserl:mountaincar-v0")
+metaEnv = gym.make("gym_reverserl:mountaincar-v0", agent_policy=randomAgentPolicy)
 def customNextEnvStatePolicy(previous_env_state, agent_action):
     return metaEnv.action_space.sample()
 
@@ -40,4 +42,3 @@ for step in range(100):
     obs, reward, done, info = metaEnv.step(environment_state)
     previous_environment_state, agent_action = obs
     assert (environment_state == previous_environment_state).all() # should be the same
-    
